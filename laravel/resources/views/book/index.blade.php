@@ -22,7 +22,7 @@
               <tbody>
                 @foreach ($books as $book)
                   <tr>
-                    <th>{{ $book->title }}</th>
+                    <th><a href="https://www.amazon.co.jp/dp/{{ $book->asin }}" target="_blank">{{ $book->title }}</a></th>
                     <td>{{ $book->recommendation_comment }} by {{ $book->recommender->name }}</td>
                     @foreach ($users as $user)
                       <td>
