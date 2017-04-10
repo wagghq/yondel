@@ -20,6 +20,9 @@ h1, h2, label, input, button {
   display: block;
   text-align: center;
   letter-spacing: .1em;
+  > a {
+    color: inherit;
+  }
 }
 
 .centering-flex {

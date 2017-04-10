@@ -7,7 +7,7 @@
     <div class="row">
       <div class="columns">
         <header class="site-header">
-          <h1 class="site-title">YONDEL</h1>
+          <h1 class="site-title"><a href="{{ route('facade') }}">YONDEL</a></h1>
         </header>
       </div>
     </div>
