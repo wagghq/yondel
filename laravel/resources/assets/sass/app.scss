@@ -1,0 +1,32 @@
+// Variables
+//@import "variables";
+
+// Bootstrap
+@import "node_modules/foundation-sites/dist/css/foundation-flex";
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+
+body {
+  font-family: 'Noto Sans Japanese', sans-serif;
+  font-weight: 100;
+  padding-top: 1.5rem;
+}
+
+h1, h2, label, input, button {
+  font-weight: 100;
+}
+
+.site-title {
+  display: block;
+  text-align: center;
+  letter-spacing: .1em;
+}
+
+.centering-flex {
+  justify-content: center;
+  align-items: center;
+}
+
+.facade {
+  text-align: center;
+}

@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  nginx:
+    build: ./nginx/.
+    ports:
+      - '8888:80'
+    volumes_from:
+      - laravel
+  laravel:
+    build: ./laravel/.
+    volumes:
+      - ./laravel:/laravel
+  mysql:
+      image: mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_USER: user
+        MYSQL_PASSWORD: user
+      ports:
+        - '3306:3306'
+      volumes:
+        - ./mysql:/var/lib/mysql
