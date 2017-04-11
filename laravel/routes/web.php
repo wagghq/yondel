@@ -18,4 +18,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('book', 'BookController');
     Route::post('/book/{id}/read', 'BookController@read')->name('book.read');
     Route::get('/user/{id}', 'UserController@show')->name('user.show');
+    Route::resource('invitation', 'InvitationController', ['except' => ['edit', 'update']]);
 });

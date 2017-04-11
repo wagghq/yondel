@@ -23,7 +23,7 @@
                 @foreach ($books as $book)
                   <tr>
                     <th><a href="https://www.amazon.co.jp/dp/{{ $book->asin }}" target="_blank">{{ $book->title }}</a></th>
-                    <td>{{ $book->recommendation_comment }} by {{ $book->recommender->name }}</td>
+                    <td><span data-tooltip aria-haspopup="true" class="has-tip" title="{{ $book->recommendation_comment }}">by {{ $book->recommender->name }}</span></td>
                     @foreach ($users as $user)
                       <td>
                         @if ($book->readers->contains($user))
