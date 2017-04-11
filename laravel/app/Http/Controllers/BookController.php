@@ -11,8 +11,10 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::all();
-        $users = User::all();
+        $currentTeam = Auth::user()->currentTeam;
+
+        $books = Book::where('team_id', $currentTeam->id)->get();
+        $users = $currentTeam->users;
 
         return view('book.index', compact('books', 'users'));
     }
@@ -41,7 +43,8 @@ class BookController extends Controller
             'recommendation_comment' => ['required', 'string']
         ]);
 
-        $book = Book::create([
+        Book::create([
+            'team_id' => Auth::user()->current_team_id,
             'recommender_id' => Auth::user()->id,
             'title' => $request->input('title'),
             'asin' => $request->input('asin'),
