@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
+    }
+
+    public function currentTeam()
+    {
+        return $this->hasOne(Team::class, 'id', 'current_team_id');
+    }
 }
