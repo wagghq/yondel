@@ -28,7 +28,7 @@
         </div>
         <label>
           Recommendation comment
-          <textarea name="recommendation_comment" required="required"></textarea>
+          <textarea name="recommendation_comment" required="required" rows="5"></textarea>
         </label>
         <button type="submit" class="button">Add</button>
       </form>

@@ -19,6 +19,7 @@
         <nav>
           <ul class="vertical medium-horizontal menu centering-flex">
             @if (Auth::check())
+              <li><a href="{{ route('book.index') }}">Books</a></li>
               <li><a href="{{ route('book.create') }}">Add a book</a></li>
               <li><a href="{{ route('auth.logout') }}">Logout</a></li>
             @else
