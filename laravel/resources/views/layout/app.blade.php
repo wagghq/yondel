@@ -21,6 +21,8 @@
             @if (Auth::check())
               <li><a href="{{ route('book.index') }}">Books</a></li>
               <li><a href="{{ route('book.create') }}">Add a book</a></li>
+              <li><a href="{{ route('invitation.create') }}">Invite a member</a></li>
+              <li><a href="{{ route('invitation.index') }}">Your invitations</a></li>
               <li><a href="{{ route('auth.logout') }}">Logout</a></li>
             @else
               <li><a href="{{ route('auth.login') }}">Login</a></li>
@@ -49,6 +51,7 @@
     @hasSection('script')
       <script>
         @yield('script')
+        $(document).foundation();
       </script>
     @endif
   </body>

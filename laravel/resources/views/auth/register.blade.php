@@ -7,43 +7,51 @@
         <header>
           <h2>Register</h2>
         </header>
-        <form action="{{ route('auth.register') }}" method="POST">
-          {{ csrf_field() }}
 
-          <label>
-            Your name
-            <input type="text" name="name" required="required" value="{{ old('name') }}" />
-          </label>
-          @if ($errors->has('name'))
-            <p class="help-text">{{ $errors->first('name') }}</p>
-          @endif
+        @if (null === $invitationCode)
+          <div class="callout secondary">
+            <h5>Invitation Required</h5>
+            <p>For the moment, an invitation code is required to register for YONDEL.</p>
+          </div>
+        @else
+          <form action="{{ route('auth.register') }}" method="POST">
+            {{ csrf_field() }}
+            <input type="hidden" name="invitation_code" value="{{ $invitationCode ?: old('invitation_code') }}" />
+            <label>
+              Your name
+              <input type="text" name="name" required="required" value="{{ old('name') }}" />
+            </label>
+            @if ($errors->has('name'))
+              <p class="help-text">{{ $errors->first('name') }}</p>
+            @endif
 
-          <label>
-            Email address
-            <input type="email" name="email" required="required" value="{{ old('email') }}" />
-          </label>
-          @if ($errors->has('email'))
-            <p class="help-text">{{ $errors->first('email') }}</p>
-          @endif
+            <label>
+              Email address
+              <input type="email" name="email" required="required" value="{{ old('email') }}" />
+            </label>
+            @if ($errors->has('email'))
+              <p class="help-text">{{ $errors->first('email') }}</p>
+            @endif
 
-          <label>
-            Choose a password
-            <input type="password" name="password" required="required" />
-          </label>
-          @if ($errors->has('password'))
-            <p class="help-text">{{ $errors->first('password') }}</p>
-          @endif
+            <label>
+              Choose a password
+              <input type="password" name="password" required="required" />
+            </label>
+            @if ($errors->has('password'))
+              <p class="help-text">{{ $errors->first('password') }}</p>
+            @endif
 
-          <label>
-            Confirm a password
-            <input type="password" name="password_confirmation" required="required" />
-          </label>
-          @if ($errors->has('password_confirmation'))
-            <p class="help-text">{{ $errors->first('password_confirmation') }}</p>
-          @endif
+            <label>
+              Confirm a password
+              <input type="password" name="password_confirmation" required="required" />
+            </label>
+            @if ($errors->has('password_confirmation'))
+              <p class="help-text">{{ $errors->first('password_confirmation') }}</p>
+            @endif
 
-          <button type="submit" class="success button">Register</button>
-        </form>
+            <button type="submit" class="success button">Register</button>
+          </form>
+        @endif
       </section>
     </div>
   </div>

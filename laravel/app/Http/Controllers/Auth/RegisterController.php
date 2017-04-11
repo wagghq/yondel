@@ -2,6 +2,8 @@
 
 namespace Wagg\Yondel\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Wagg\Yondel\Model\Invitation;
 use Wagg\Yondel\Model\User;
 use Wagg\Yondel\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -19,8 +21,12 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
+
+    public function showRegistrationForm($invitationCode = null)
+    {
+        return view('auth.register', compact('invitationCode'));
+    }
 
     /**
      * Where to redirect users after registration.
@@ -51,6 +57,7 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'invitation_code' => 'string',
         ]);
     }
 
@@ -62,10 +69,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        $invitation = Invitation::where('code', $data['invitation_code'])->first();
+        $user->teams()->attach($invitation->team_id);
+        $user->current_team_id = $invitation->team_id;
+
+        return $user;
     }
 }
