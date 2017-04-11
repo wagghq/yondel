@@ -2,10 +2,10 @@
 
 # Invitation Created
 
-{{ $inviter->name }} has created an invitation for you to {{ $team->name}} on YONDEL.
+{{ $invitation->inviter->name }} has created an invitation for you to {{ $invitation->team->name }} on YONDEL.
 
-@component('mail::button', ['url' => $url])
-Join {{ $team->name}}
+@component('mail::button', ['url' => route('auth.register', ['code' => $invitation->code])])
+Join {{ $invitation->team->name }}
 @endcomponent
 
 Thanks,

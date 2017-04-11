@@ -11,19 +11,16 @@ class InvitationCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $team;
-
-    private $inviter;
+    private $invitation;
 
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param $invitation
      */
-    public function __construct($team, $inviter)
+    public function __construct($invitation)
     {
-        $this->team = $team;
-        $this->inviter = $inviter;
+        $this->invitation = $invitation;
     }
 
     /**
@@ -34,11 +31,9 @@ class InvitationCreated extends Mailable
     public function build()
     {
         return $this
-            ->from($this->inviter->email)
+            ->from($this->invitation->inviter->email)
             ->markdown('email.invitation.created', [
-                'team' => $this->team,
-                'inviter' => $this->inviter,
-                'url' => 'http://google.com',
+                'invitation' => $this->invitation,
             ]);
     }
 }

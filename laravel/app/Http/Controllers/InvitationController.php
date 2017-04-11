@@ -43,14 +43,14 @@ class InvitationController extends Controller
 
         $user = Auth::user();
 
-        Mail::to($user)->send(new InvitationCreated(Auth::user()->currentTeam, $user));
-
-        Invitation::create([
+        $invitation = Invitation::create([
             'team_id' => $user->current_team_id,
             'inviter_id' => $user->id,
             'invitee_email' => $request->input('email'),
             'code' => Uuid::uuid4()->toString(),
         ]);
+
+        Mail::to($user)->send(new InvitationCreated($invitation));
 
         return redirect()->route('invitation.index');
     }

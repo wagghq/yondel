@@ -5,7 +5,7 @@
 \
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/auth/register', 'Auth\RegisterController@showRegistrationForm')->name('auth.register');
+    Route::get('/auth/register/{invitationCode?}', 'Auth\RegisterController@showRegistrationForm')->name('auth.register');
     Route::post('/auth/register', 'Auth\RegisterController@register');
     Route::get('/auth/login', 'Auth\LoginController@showLoginForm')->name('auth.login');
     Route::post('/auth/login', 'Auth\LoginController@login');

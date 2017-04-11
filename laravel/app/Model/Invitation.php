@@ -18,12 +18,12 @@ class Invitation extends Model
 
     public function team()
     {
-        return $this->hasOne(Team::class);
+        return $this->belongsTo(Team::class);
     }
 
     public function inviter()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class, 'inviter_id');
     }
 
     /**
