@@ -25,7 +25,15 @@ class RegisterController extends Controller
 
     public function showRegistrationForm($invitationCode = null)
     {
-        return view('auth.register', compact('invitationCode'));
+        $invitationIsInvalid = false;
+
+        if (null !== $invitationCode) {
+            if (null === Invitation::where('code', $invitationCode)->first()) {
+                $invitationIsInvalid = true;
+            }
+        }
+
+        return view('auth.register', compact('invitationIsInvalid', '$invitationCode'));
     }
 
     /**
@@ -57,7 +65,7 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-            'invitation_code' => 'string',
+            'invitation_code' => 'sometimes|required|exists:invitations,code',
         ]);
     }
 
@@ -75,11 +83,13 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        $invitation = Invitation::where('code', $data['invitation_code'])->first();
-        $user->teams()->attach($invitation->team_id);
-        $user->current_team_id = $invitation->team_id;
-        $user->save();
-        $invitation->delete();
+        if (isset($data['invitation_code'])) {
+            $invitation = Invitation::where('code', $data['invitation_code'])->first();
+            $user->teams()->attach($invitation->team_id);
+            $user->current_team_id = $invitation->team_id;
+            $user->save();
+            $invitation->delete();
+        }
 
         return $user;
     }
