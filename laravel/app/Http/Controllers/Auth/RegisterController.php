@@ -79,6 +79,7 @@ class RegisterController extends Controller
         $user->teams()->attach($invitation->team_id);
         $user->current_team_id = $invitation->team_id;
         $user->save();
+        $invitation->delete();
 
         return $user;
     }
