@@ -56,5 +56,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \Wagg\Yondel\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'hasTeam' => \Wagg\Yondel\Http\Middleware\CreateIfWithoutTeam::class,
     ];
 }

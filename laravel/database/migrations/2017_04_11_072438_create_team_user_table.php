@@ -18,7 +18,7 @@ class CreateTeamUserTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->timestamps();
 
-            $table->foreign('team_id')->references('id')->on('books')->onDelete('cascade');
+            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

@@ -10,6 +10,9 @@
           <h1 class="site-title"><a href="{{ route('facade') }}">YONDEL</a></h1>
         </header>
       </div>
+      @if (Auth::check())
+        @include('partial.teamSwitcher')
+      @endif
     </div>
 
     <hr />
