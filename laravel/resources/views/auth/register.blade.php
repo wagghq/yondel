@@ -7,16 +7,18 @@
         <header>
           <h2>Register</h2>
         </header>
-
-        @if (null === $invitationCode)
+        @if ($invitationIsInvalid)
           <div class="callout secondary">
-            <h5>Invitation Required</h5>
-            <p>For the moment, an invitation code is required to register for YONDEL.</p>
+            <h5>Invalid invitation code</h5>
+            <p>InvitationCode is not valid or has already been consumed.</p>
+            <p><a href="{{ route('auth.register') }}">Register without invitation?</a></p>
           </div>
         @else
           <form action="{{ route('auth.register') }}" method="POST">
             {{ csrf_field() }}
-            <input type="hidden" name="invitation_code" value="{{ $invitationCode ?: old('invitation_code') }}" />
+            @if (isset($invitationCode))
+              <input type="hidden" name="invitation_code" value="{{ old('invitation_code') }}" />
+            @endif
             <label>
               Your name
               <input type="text" name="name" required="required" value="{{ old('name') }}" />

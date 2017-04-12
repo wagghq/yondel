@@ -3,7 +3,9 @@
 namespace Wagg\Yondel\Providers;
 
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Wagg\Yondel\Http\ViewComposers\TeamSwitcherComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +17,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        View::composer(
+            'partial.teamSwitcher',
+            TeamSwitcherComposer::class
+        );
     }
 
     /**
