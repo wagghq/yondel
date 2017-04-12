@@ -78,6 +78,7 @@ class RegisterController extends Controller
         $invitation = Invitation::where('code', $data['invitation_code'])->first();
         $user->teams()->attach($invitation->team_id);
         $user->current_team_id = $invitation->team_id;
+        $user->save();
 
         return $user;
     }
