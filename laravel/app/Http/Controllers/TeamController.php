@@ -33,7 +33,9 @@ class TeamController extends Controller
 
     public function switch($id)
     {
-        Auth::user()->current_team_id = $id;
+        $user = Auth::user();
+        $user->current_team_id = $id;
+        $user->save();
 
         return redirect()->back();
     }
