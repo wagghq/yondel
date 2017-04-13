@@ -16,8 +16,8 @@
         @else
           <form action="{{ route('auth.register') }}" method="POST">
             {{ csrf_field() }}
-            @if (isset($invitationCode))
-              <input type="hidden" name="invitation_code" value="{{ old('invitation_code') }}" />
+            @if (isset($invitationCode) || old('invitation_code'))
+              <input type="hidden" name="invitation_code" value="{{ $invitationCode ?? old('invitation_code') }}" />
             @endif
             <label>
               Your name
