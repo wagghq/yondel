@@ -3,6 +3,7 @@
 namespace Wagg\Yondel\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Wagg\Yondel\Model\Invitation;
 use Wagg\Yondel\Model\User;
 use Wagg\Yondel\Http\Controllers\Controller;
@@ -21,7 +22,9 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-    use RegistersUsers;
+    use RegistersUsers {
+        register as traitRegister;
+    }
 
     public function showRegistrationForm($invitationCode = null)
     {
@@ -33,7 +36,7 @@ class RegisterController extends Controller
             }
         }
 
-        return view('auth.register', compact('invitationIsInvalid', '$invitationCode'));
+        return view('auth.register', compact('invitationIsInvalid', 'invitationCode'));
     }
 
     /**
@@ -83,14 +86,24 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        if (isset($data['invitation_code'])) {
-            $invitation = Invitation::where('code', $data['invitation_code'])->first();
+        return $user;
+    }
+
+    public function register(Request $request)
+    {
+        $redirect = $this->traitRegister($request);
+
+        $user = Auth::user();
+
+
+        if (null !== $request->input('invitation_code')) {
+            $invitation = Invitation::where('code', $request->input('invitation_code'))->first();
             $user->teams()->attach($invitation->team_id);
             $user->current_team_id = $invitation->team_id;
             $user->save();
             $invitation->delete();
         }
 
-        return $user;
+        return $redirect;
     }
 }
