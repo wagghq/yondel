@@ -1,4 +1,4 @@
-<form>
+<form class="team-switcher">
   <select id="{{ $selectId = uniqid() }}">
     @foreach ($teams as $team)
       <option
