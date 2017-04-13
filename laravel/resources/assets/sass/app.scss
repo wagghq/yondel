@@ -1,4 +1,4 @@
-// Variables
+ // Variables
 //@import "variables";
 
 // Bootstrap
@@ -23,6 +23,10 @@ h1, h2, label, input, button {
   > a {
     color: inherit;
   }
+}
+
+.team-switcher {
+  margin-top: 1.5rem;
 }
 
 .centering-flex {

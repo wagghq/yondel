@@ -4,15 +4,15 @@
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}" />
   </head>
   <body>
-    <div class="row">
-      <div class="columns">
+    <div class="row align-center">
+      <div class="medium-4 columns">
         <header class="site-header">
           <h1 class="site-title"><a href="{{ route('facade') }}">YONDEL</a></h1>
+          @if (Auth::check())
+            @include('partial.teamSwitcher')
+          @endif
         </header>
       </div>
-      @if (Auth::check())
-        @include('partial.teamSwitcher')
-      @endif
     </div>
 
     <hr />
