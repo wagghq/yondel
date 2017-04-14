@@ -19,7 +19,6 @@ class CreateBooksTable extends Migration
             $table->string('title');
             $table->text('image')->nullable();
             $table->string('asin', 10);
-            $table->text('recommendation_comment');
             $table->timestamps();
             $table->softDeletes();
 
