@@ -16,9 +16,8 @@ class BookController extends Controller
         $currentTeam = Auth::user()->currentTeam;
 
         $books = Book::where('team_id', $currentTeam->id)->get();
-        $users = $currentTeam->users;
 
-        return view('book.index', compact('books', 'users'));
+        return view('book.index', compact('books'));
     }
 
 
@@ -26,8 +25,9 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         $readers = $book->readers;
+        $comments = $book->comments;
 
-        return view('book.show', compact('book', 'readers'));
+        return view('book.show', compact('book', 'readers', 'comments'));
     }
 
 
