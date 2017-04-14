@@ -57,12 +57,6 @@
             @endforeach
             </tbody>
           </table>
-          <ul>
-            @foreach ($readers as $reader)
-              <li>{{ $reader->name }}</li>
-            @endforeach
-          </ul>
-
 
           <form action="{{ route('book.read', $book->id) }}" method="POST">
             {{ csrf_field() }}
