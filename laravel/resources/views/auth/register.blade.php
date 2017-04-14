@@ -44,7 +44,7 @@
             @endif
 
             <label>
-              Confirm a password
+              Confirm the password
               <input type="password" name="password_confirmation" required="required" />
             </label>
             @if ($errors->has('password_confirmation'))

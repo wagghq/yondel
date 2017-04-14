@@ -7,7 +7,7 @@ use Wagg\Yondel\Model\Book;
 
 class HomeController extends Controller
 {
-    public function home()
+    public function index()
     {
         return redirect()->route('book.index');
     }

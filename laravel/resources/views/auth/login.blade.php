@@ -27,6 +27,8 @@
           @endif
 
           <button type="submit" class="success button">Login</button>
+
+          <p><a href="{{ route('password.forgot') }}">Forgot password?</a></p>
         </form>
       </section>
     </div>
