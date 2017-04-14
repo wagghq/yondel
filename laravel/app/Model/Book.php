@@ -23,4 +23,9 @@ class Book extends Model
     {
         return $this->hasOne(User::class, 'id', 'recommender_id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(BookComment::class);
+    }
 }

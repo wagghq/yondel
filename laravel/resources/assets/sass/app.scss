@@ -3,6 +3,7 @@
 
 // Bootstrap
 @import "node_modules/foundation-sites/dist/css/foundation-flex";
+@import "node_modules/foundation-sites/dist/css/foundation-flex";
 
 @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
 
@@ -12,7 +13,7 @@ body {
   padding-top: 1.5rem;
 }
 
-h1, h2, label, input, button {
+h1, h2, h3, h4, h5, h6 label, input, button {
   font-weight: 100;
 }
 
@@ -36,4 +37,11 @@ h1, h2, label, input, button {
 
 .facade {
   text-align: center;
+}
+
+.read {
+  background: #3adb76;
+}
+.unread {
+
 }

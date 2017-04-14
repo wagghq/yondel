@@ -15,7 +15,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'hasTeam'], function () {
         Route::get('/home', 'HomeController@index')->name('home');
         Route::resource('book', 'BookController');
+        Route::post('/book/{id}', 'BookController@show')->name('book.show');
         Route::post('/book/{id}/read', 'BookController@read')->name('book.read');
+        Route::post('/book/{id}/comment/store', 'BookCommentController@store')->name('bookComment.store');
         Route::get('/user/{id}', 'UserController@show')->name('user.show');
         Route::resource('invitation', 'InvitationController', ['except' => ['edit', 'update']]);
         Route::get('team/{id}/switch', 'TeamController@switch')->name('team.switch');
