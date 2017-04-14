@@ -24,7 +24,7 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::find($id);
-        $users = User::all();
+        $users = Auth::user()->currentTeam->users;
         $readers = $book->readers;
         $comments = $book->comments;
 
