@@ -24,10 +24,11 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::find($id);
+        $users = User::all();
         $readers = $book->readers;
         $comments = $book->comments;
 
-        return view('book.show', compact('book', 'readers', 'comments'));
+        return view('book.show', compact('book', 'users', 'readers', 'comments'));
     }
 
 
