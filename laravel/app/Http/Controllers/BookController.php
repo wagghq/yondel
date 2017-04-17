@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Wagg\Yondel\Mail\BookCreated;
 use Wagg\Yondel\Model\Book;
+use Wagg\Yondel\Model\BookComment;
 use Wagg\Yondel\Model\User;
 
 class BookController extends Controller
@@ -53,7 +54,12 @@ class BookController extends Controller
             'recommender_id' => Auth::user()->id,
             'title' => $request->input('title'),
             'asin' => $request->input('asin'),
-            'recommendation_comment' => $request->input('recommendation_comment'),
+        ]);
+
+        BookComment::create([
+            'book_id' => $book->id,
+            'user_id' => Auth::user()->id,
+            'body' => $request->input('recommendation_comment'),
         ]);
 
         Mail::to($team->users)->send(new BookCreated($book));

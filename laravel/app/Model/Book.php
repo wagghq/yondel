@@ -11,7 +11,6 @@ class Book extends Model
         'recommender_id',
         'title',
         'asin',
-        'recommendation_comment',
     ];
 
     public function readers()
