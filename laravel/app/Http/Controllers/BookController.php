@@ -54,6 +54,7 @@ class BookController extends Controller
             'recommender_id' => Auth::user()->id,
             'title' => $request->input('title'),
             'asin' => $request->input('asin'),
+            'recommendation_comment' => '',
         ]);
 
         BookComment::create([
